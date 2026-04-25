@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+ErrorDocument 404 /404
+RewriteEngine On
+RewriteBase /
+
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+RewriteRule ^$ /?m=home&act=index [L]
