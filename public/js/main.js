@@ -1,24 +1,24 @@
 var domain = window.location.protocol + "//" + window.location.host + "";
 
-// $.ajaxSetup({ global: true });
-// $.ajaxGlobalRunning = false; //Giá trị global để xác định ajax đang chạy, để cấu hình ngăn ko cho các ajax khác chạy
+$.ajaxSetup({ global: true });
+$.ajaxGlobalRunning = false; //Giá trị global để xác định ajax đang chạy, để cấu hình ngăn ko cho các ajax khác chạy
 
-// //Khi ajax bắt đầu chạy thì show thành loading lên
-// $(document).ajaxStart(function () {
-//     $.ajaxGlobalRunning = true;
-//     document.getElementById('loadingPage').classList.add('active');
-// });
+//Khi ajax bắt đầu chạy thì show thành loading lên
+$(document).ajaxStart(function () {
+    $.ajaxGlobalRunning = true;
+    document.getElementById('loadingPage').classList.add('active');
+});
 
-// //Ajax complete thì ẩn loading
-// $(document).ajaxComplete(function () {
-//     document.getElementById('loadingPage').classList.remove('active');
-//     $.ajaxGlobalRunning = false;
-// });
+//Ajax complete thì ẩn loading
+$(document).ajaxComplete(function () {
+    document.getElementById('loadingPage').classList.remove('active');
+    $.ajaxGlobalRunning = false;
+});
 
-// //Ajax dừng lại thì cho chạy tiếp lệnh tiếp theo
-// $(document).ajaxStop(function () {
-//     $.ajaxGlobalRunning = false;
-// });
+//Ajax dừng lại thì cho chạy tiếp lệnh tiếp theo
+$(document).ajaxStop(function () {
+    $.ajaxGlobalRunning = false;
+});
 
 function _doAjaxNod(type_, data_, m_, act_, nod_, global_, doSomeThing) {
     if (data_ == "") {

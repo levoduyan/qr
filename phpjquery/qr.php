@@ -35,7 +35,7 @@ if ($act == 'create') {
                     QRcode::png($line, $fileName, QR_ECLEVEL_L, 5);
                     $qrList[] = [
                         'text' => $line,
-                        'file' => md5($line) . ".png"
+                        'file' => $_SESSION['csrf_token'] . '/' . md5($line) . ".png"
                     ];
                 }
             }
@@ -50,7 +50,7 @@ if ($act == 'create') {
 
         $generatedQR[] = [
             'text' => $data_qr,
-            'file' => md5($data_qr) . ".png"
+            'file' => $_SESSION['csrf_token'] . '/' . md5($data_qr) . ".png"
         ];
 
         echo 'done##', $main->toJsonData(200, 'success', $generatedQR);
