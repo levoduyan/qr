@@ -1,24 +1,24 @@
 var domain = window.location.protocol + "//" + window.location.host + "";
 
-$.ajaxSetup({ global: true });
-$.ajaxGlobalRunning = false; //Giá trị global để xác định ajax đang chạy, để cấu hình ngăn ko cho các ajax khác chạy
+// $.ajaxSetup({ global: true });
+// $.ajaxGlobalRunning = false; //Giá trị global để xác định ajax đang chạy, để cấu hình ngăn ko cho các ajax khác chạy
 
-//Khi ajax bắt đầu chạy thì show thành loading lên
-$(document).ajaxStart(function () {
-    $.ajaxGlobalRunning = true;
-    document.getElementById('loadingPage').classList.add('active');
-});
+// //Khi ajax bắt đầu chạy thì show thành loading lên
+// $(document).ajaxStart(function () {
+//     $.ajaxGlobalRunning = true;
+//     document.getElementById('loadingPage').classList.add('active');
+// });
 
-//Ajax complete thì ẩn loading
-$(document).ajaxComplete(function () {
-    document.getElementById('loadingPage').classList.remove('active');
-    $.ajaxGlobalRunning = false;
-});
+// //Ajax complete thì ẩn loading
+// $(document).ajaxComplete(function () {
+//     document.getElementById('loadingPage').classList.remove('active');
+//     $.ajaxGlobalRunning = false;
+// });
 
-//Ajax dừng lại thì cho chạy tiếp lệnh tiếp theo
-$(document).ajaxStop(function () {
-    $.ajaxGlobalRunning = false;
-});
+// //Ajax dừng lại thì cho chạy tiếp lệnh tiếp theo
+// $(document).ajaxStop(function () {
+//     $.ajaxGlobalRunning = false;
+// });
 
 function _doAjaxNod(type_, data_, m_, act_, nod_, global_, doSomeThing) {
     if (data_ == "") {
@@ -47,8 +47,14 @@ function _doAjaxNod(type_, data_, m_, act_, nod_, global_, doSomeThing) {
                 if (obj.status == 200)
                     doSomeThing(obj); //success respone data from server
                 else if (obj.status == 401) alert_void(obj.message, 0);
-                else if (obj.status == 403) alert_void(obj.message, 0);
-                else alert_void(obj.message, 0);
+                else if (obj.status == 403){
+                    alert_void(obj.message, 0);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 3000);
+                } else {
+                    alert_void(obj.message, 0);
+                }
             } else {
                 alert_void(respone, 0);
             }
@@ -102,9 +108,11 @@ function _doAjax(type_, data_, m_, act_, global_, doSomeThing) {
                         break;
                     case 403:
                         alert_void(obj.message || "Truy cập bị từ chối!");
-                        break;
                     default:
                         alert_void(obj.message || "Có lỗi xảy ra!");
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
                         break;
                 }
             } else {
@@ -138,7 +146,7 @@ function alert_void(_message, _success) {
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 7200,
+        timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.onmouseenter = Swal.stopTimer;

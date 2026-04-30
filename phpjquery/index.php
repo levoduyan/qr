@@ -14,12 +14,12 @@ $api_key 	= $main->get('apikey');
 // exit;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-    echo "Lỗi: CSRF token không hợp lệ!";
+    echo 'done##', $main->toJsonData(308, 'Lỗi: CSRF token không hợp lệ!', null);
 }else if($m == 'qr'){
     include $m.'.php';
     
 }else{
-    echo  "Lỗi:003 - index.ajax.";
+    echo 'done##', $main->toJsonData(308, 'Lỗi:308 - index.ajax.', null);
 }
 
 

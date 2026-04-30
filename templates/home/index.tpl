@@ -2,31 +2,29 @@
     <!-- Left Section -->
     <div class="left-section">
         <div class="header">
-            <button class="btn-text">≡ Văn bản</button>
-            {* <div class="nav-items">
-                <div class="nav-item">🔗 Đường dẫn</div>
-                <div class="nav-item">⋯ Khác <span class="dropdown-icon">▼</span></div>
-            </div> *}
-        </div>
-
-        <div class="input-group">
-            <textarea placeholder="Nhập nội dung để tạo QR code..." id="data_qr"></textarea>
-        </div>
-
-        <div class="qr-count">Số QR: <span id="qr_count">0</span></div>
-
-        <div class="checkbox-group">
-            <div class="checkbox-item">
-                <input type="checkbox" id="display_text">
-                <label for="display_text">Hiển thị chữ kèm mã QR</label>
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="batch">QR hàng loạt</button>
+                <button class="tab-btn" data-tab="single">QR lẻ</button>
             </div>
-            {* <div class="checkbox-item">
-                <input type="checkbox" id="create_more">
-                <label for="create_more">Tạo nhiều QR (mỗi dòng là một QR) </label>
-            </div> *}
         </div>
+        <div class="tab-content active" id="batch">
+            <div class="input-group">
+                <textarea placeholder="Nhập mỗi dòng là một nội dung QR..." id="data_qr_batch"></textarea>
+            </div>
 
-        <button class="btn-create">⊞ Tạo QR code</button>
+            <div class="qr-count"><i class="fa-solid fa-list"></i> Số QR: <span id="qr_count">0</span></div>
+
+            <div class="button-group">
+                <button class="btn-create"><i class="fa-solid fa-qrcode"></i> Tạo QR code</button>
+                <button class="btn-reset" type="button"><i class="fa-solid fa-arrows-rotate"></i> Làm mới</button>
+            </div>
+        </div>
+        <div class="tab-content" id="single">
+            <div class="input-group">
+                <textarea placeholder="Nhập nội dung để tạo QR code..." id="data_qr_single"></textarea>
+            </div>
+
+        </div>
     </div>
 
     <!-- Right Section -->
@@ -40,7 +38,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 
