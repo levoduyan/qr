@@ -7,6 +7,13 @@
     </div>
 </div>
 
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2026 <a href="{$domain}">qr.anlvd.id.vn</a>. Sở hữu bởi Lê Võ Duy An.</p>
+    </div>
+</footer>
+
 </body>
 
 <script type="text/javascript" src="{$domain}/public/js/jquery-ui.min.js?{$version}"></script>

@@ -9,6 +9,8 @@ body {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     min-height: 100vh;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .hidden {
@@ -96,7 +98,7 @@ body {
     display: flex;
     gap: 30px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
     background: white;
     border-radius: 20px;
     padding: 40px;
@@ -416,4 +418,33 @@ textarea:focus {
     .right-section {
         flex-direction: column;
     }
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-top: 2px solid #10b981;
+}
+
+footer p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer a {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #059669;
 }
