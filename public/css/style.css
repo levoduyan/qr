@@ -169,7 +169,7 @@ body {
     margin-bottom: 20px;
 }
 
-textarea#data_qr_single {
+textarea#data_qr_single, textarea#data_barcode_single {
     width: 100%;
     min-height: 230px;
     padding: 15px;
@@ -181,7 +181,7 @@ textarea#data_qr_single {
     color: #333;
 }
 
-textarea#data_qr_batch {
+textarea#data_qr_batch, textarea#data_barcode_batch {
     width: 100%;
     min-height: 115px;
     padding: 15px;
@@ -204,7 +204,7 @@ textarea:focus {
 }
 
 /* QR Count Badge */
-.qr-count {
+.qr-count, .barcode-count {
     display: inline-block;
     background: #1abc9c;
     color: white;
@@ -262,7 +262,7 @@ textarea:focus {
 }
 
 /* Button */
-.btn-create {
+.btn-create, .btn-create-barcode {
     flex: 1;
     min-width: 0;
     background: #1abc9c;
@@ -281,11 +281,11 @@ textarea:focus {
     margin-top: 0;
 }
 
-.btn-create:hover {
+.btn-create:hover, .btn-create-barcode:hover {
     background: #16a085;
 }
 
-.btn-reset {
+.btn-reset, .btn-reset-barcode {
     min-width: 200px;
     background: #e74c3c;
     color: white;
@@ -303,7 +303,7 @@ textarea:focus {
     margin-top: 0;
 }
 
-.btn-reset:hover {
+.btn-reset:hover, .btn-reset-barcode:hover {
     background: #c0392b;
 }
 
@@ -314,7 +314,7 @@ textarea:focus {
     border: 2px solid #a7f3d0 !important;
 }
 
-.qr-container {
+.qr-container, .barcode-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -322,7 +322,7 @@ textarea:focus {
     border-radius: 6px;
 }
 
-.qr-item {
+.qr-item, .barcode-item {
     background: white;
     border-radius: 10px;
     padding: 25px;
@@ -346,14 +346,22 @@ textarea:focus {
 
 }
 
-.qr-placeholder {
+.barcode-code {
+    width: 200px;
+    height: 100px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-placeholder, .barcode-placeholder {
     width: 100%;
     height: 100%;
-    background:
+    /* background:
         linear-gradient(0deg, #000 0%, #000 12%, transparent 12%, transparent 38%, #000 38%, #000 50%, transparent 50%, transparent 76%, #000 76%, #000 88%, transparent 88%),
         linear-gradient(90deg, #000 0%, #000 12%, transparent 12%, transparent 38%, #000 38%, #000 50%, transparent 50%, transparent 76%, #000 76%, #000 88%, transparent 88%),
         linear-gradient(45deg, #000 0%, transparent 50%, #000 50%, #000 100%),
-        linear-gradient(-45deg, #000 0%, transparent 50%, #000 50%, #000 100%);
+        linear-gradient(-45deg, #000 0%, transparent 50%, #000 50%, #000 100%); */
     background-size: 100% 100%, 100% 100%, 48% 48%, 48% 48%;
     background-position: 0 0, 0 0, 0 0, 100% 100%;
     background-repeat: no-repeat;
@@ -362,9 +370,9 @@ textarea:focus {
     position: relative;
 }
 
-.qr-text {
+.qr-text, .barcode-text {
     font-size: 20px;
-    color: #888;
+    color: #6b757d;
     font-weight: 500;
     text-align: center;
     letter-spacing: 1px;
@@ -377,7 +385,14 @@ textarea:focus {
     height: auto;
 }
 
-.qr-default {
+.barcode-placeholder img {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 80%;
+    max-height: 100%;
+}
+
+.qr-default, .barcode-default {
     opacity: .2;
 }
 

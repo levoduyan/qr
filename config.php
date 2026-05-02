@@ -24,6 +24,9 @@ $dotenv->load();
  */
 require_once __DIR__.'/library/phpqrcode/qrlib.php';
 
+require_once __DIR__ . '/library/phpbarcode/autoload.php';
+$barCode = new Picqer\Barcode\BarcodeGeneratorPNG();
+
 
 $link 		= 'https://'.$_SERVER['SERVER_NAME'].'';
 $tpldirect 	= __DIR__.'/templates/';

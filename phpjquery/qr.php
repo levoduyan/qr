@@ -56,6 +56,59 @@ if ($act == 'create') {
         echo 'done##', $main->toJsonData(200, 'success', $generatedQR);
     }
 
+} elseif ($act == 'create_barcode') {
+
+    $data_barcode = $main->post('data_barcode');
+    $is_batch     = $main->post('is_batch', 0);
+
+    if (!file_exists($folder)) {
+        mkdir($folder, 0777, true);
+    }
+    // else{
+    //     // Xóa tất cả file trong thư mục temp
+    //     $files = glob($folder . '*'); // Lấy tất cả file trong thư mục
+    //     foreach ($files as $file) {
+    //         if (is_file($file)) {
+    //             unlink($file); // Xóa file
+    //         }
+    //     }
+    // }
+
+    if($is_batch){
+        $lines = explode("\n", $data_barcode);
+        $barcodeList = [];
+
+        if($lines && count($lines) > 0){
+            foreach ($lines as $line) {
+                $line = trim($line);
+
+                if (!empty($line)) {
+                    $fileName = $folder . md5($line) . ".png";
+                    file_put_contents($fileName, $barCode->getBarcode($line, $barCode::TYPE_CODE_128, 3, 100));
+                    $barcodeList[] = [
+                        'text' => $line,
+                        'file' => $_SESSION['csrf_token'] . '/' . md5($line) . ".png"
+                    ];
+                }
+            }
+        }
+
+        echo 'done##', $main->toJsonData(200, 'success', $barcodeList);
+
+    } else {
+
+        $fileName = $folder . md5($data_barcode) . ".png";
+
+        file_put_contents($fileName, $barCode->getBarcode($data_barcode, $barCode::TYPE_CODE_128, 3, 100));
+
+        $generatedBarcode[] = [
+            'text' => $data_barcode,
+            'file' => $_SESSION['csrf_token'] . '/' . md5($data_barcode) . ".png"
+        ];
+
+        echo 'done##', $main->toJsonData(200, 'success', $generatedBarcode);
+    }
+
 } else {
     echo "Lỗi: Không tìm thấy hành động phù hợp!";
 }
