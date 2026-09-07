@@ -106,7 +106,7 @@ function _doAjax(type_, data_, m_, act_, global_, doSomeThing, retryCsrf = true)
                     case 200:
                         doSomeThing(obj);
                         break;
-                    case 308:
+                    case 419:
                         // CSRF hết hạn hoặc không hợp lệ
                         if (retryCsrf) {
                             console.log("CSRF hết hạn, đang refresh token...");

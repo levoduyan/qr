@@ -13,13 +13,13 @@ $api_key 	= $main->get('apikey');
 // print_r($_POST['csrf_token']);
 // exit;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-    echo 'done##', $main->toJsonData(308, 'Lỗi: CSRF token không hợp lệ!', null);
+if ($_SERVER["REQUEST_METHOD"] === "POST" && (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'],$_POST['csrf_token']))) {
+    echo 'done##', $main->toJsonData(419, 'Lỗi: CSRF hết hạn hoặc không hợp lệ!', null);
 }else if($m == 'qr'){
     include $m.'.php';
     
 }else{
-    echo 'done##', $main->toJsonData(308, 'Lỗi:308 - index.ajax.', null);
+    echo 'done##', $main->toJsonData(403, 'Lỗi:403 - index.ajax.', null);
 }
 
 
