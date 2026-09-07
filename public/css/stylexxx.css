@@ -97,7 +97,6 @@ body {
 .container {
     display: flex;
     gap: 30px;
-    width: 100%;
     max-width: 1200px;
     margin: 0 auto 40px;
     background: white;
@@ -108,23 +107,15 @@ body {
 
 .left-section {
     flex: 1;
-    min-width: 0;
+    min-width: 300px;
 }
 
 .right-section {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
+    min-width: 200px;
     width: 30%;
-    min-width: 0;
-    background: linear-gradient(
-        135deg,
-        #ecfdf5 0%,
-        #d1fae5 100%
-    );
-    padding: 30px;
-    border: 2px solid #a7f3d0;
-    border-radius: 12px;
 }
 
 /* Tab Navigation */
@@ -317,6 +308,12 @@ textarea:focus {
 }
 
 /* QR Code Display */
+.right-section {
+    background: linear-gradient(135deg, #ecfdf5 0, #d1fae5 100%) !important;
+    padding: 2.5rem !important;
+    border: 2px solid #a7f3d0 !important;
+}
+
 .qr-container, .barcode-container {
     display: flex;
     flex-direction: column;
@@ -360,6 +357,11 @@ textarea:focus {
 .qr-placeholder, .barcode-placeholder {
     width: 100%;
     height: 100%;
+    /* background:
+        linear-gradient(0deg, #000 0%, #000 12%, transparent 12%, transparent 38%, #000 38%, #000 50%, transparent 50%, transparent 76%, #000 76%, #000 88%, transparent 88%),
+        linear-gradient(90deg, #000 0%, #000 12%, transparent 12%, transparent 38%, #000 38%, #000 50%, transparent 50%, transparent 76%, #000 76%, #000 88%, transparent 88%),
+        linear-gradient(45deg, #000 0%, transparent 50%, #000 50%, #000 100%),
+        linear-gradient(-45deg, #000 0%, transparent 50%, #000 50%, #000 100%); */
     background-size: 100% 100%, 100% 100%, 48% 48%, 48% 48%;
     background-position: 0 0, 0 0, 0 0, 100% 100%;
     background-repeat: no-repeat;
@@ -394,276 +396,42 @@ textarea:focus {
     opacity: .2;
 }
 
-
-/* =====================================
-   RESPONSIVE TABLET
-===================================== */
+/* Responsive */
 @media (max-width: 1024px) {
-
-    body {
-        padding: 15px;
-    }
-
     .container {
         flex-direction: column;
-        gap: 25px;
-        padding: 30px;
-        max-width: 100%;
+        gap: 20px;
     }
 
-    .left-section {
-        width: 100%;
-        min-width: 0;
+    .nav-items {
+        flex-direction: column;
+        gap: 15px;
+        margin-left: 0;
     }
 
     .right-section {
-        width: 100%;
-        min-width: 0;
-
         flex-direction: row;
-        justify-content: center;
-
-        padding: 30px !important;
+        flex-wrap: wrap;
     }
 
-    .qr-container,
-    .barcode-container {
-        width: 100%;
-        align-items: center;
-    }
-
-    .qr-item,
-    .barcode-item {
-        width: 320px;
-        max-width: 100%;
-        min-width: 0;
+    .qr-item {
+        flex: 1;
+        min-width: 250px;
     }
 }
-
-/* =====================================
-   MOBILE
-===================================== */
 
 @media (max-width: 768px) {
-
-    body {
-        padding: 12px;
-    }
-
     .container {
         padding: 20px;
-        gap: 20px;
-        margin-bottom: 25px;
-        border-radius: 20px;
     }
 
-    /* LEFT SECTION */
-    .left-section {
-        width: 100%;
-        min-width: 0;
-    }
-
-    /* =====================================
-       TAB
-    ===================================== */
     .header {
-        overflow-x: auto;
-        scrollbar-width: none;
+        flex-wrap: wrap;
+        gap: 15px;
     }
 
-    .header::-webkit-scrollbar {
-        display: none;
-    }
-
-    .tab-buttons {
-        width: max-content;
-        min-width: 100%;
-    }
-
-    .tab-btn {
-        flex: none;
-        min-width: 110px;
-        white-space: nowrap;
-    }
-
-    /* =====================================
-       TEXTAREA
-    ===================================== */
-    textarea#data_qr_single,
-    textarea#data_barcode_single {
-        min-height: 180px;
-        font-size: 16px;
-        padding: 14px;
-    }
-
-    textarea#data_qr_batch,
-    textarea#data_barcode_batch {
-        min-height: 110px;
-        font-size: 16px;
-        padding: 14px;
-    }
-
-    /* =====================================
-       COUNT
-    ===================================== */
-    .qr-count,
-    .barcode-count {
-        font-size: 14px;
-        padding: 9px 14px;
-        margin-bottom: 18px;
-        margin-top: -5px;
-    }
-
-    /* =====================================
-       BUTTON
-    ===================================== */
-    .button-group {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .btn-create,
-    .btn-create-barcode,
-    .btn-reset,
-    .btn-reset-barcode {
-        width: 100%;
-        min-width: 0;
-        padding: 15px;
-        font-size: 16px;
-        min-height: 54px;
-    }
-
-    /* =====================================
-       QR SECTION
-    ===================================== */
     .right-section {
-        width: 100%;
-        min-width: 0;
-        padding: 20px !important;
         flex-direction: column;
-        border-radius: 15px;
-    }
-
-    .qr-container,
-    .barcode-container {
-        width: 100%;
-        align-items: center;
-    }
-
-    .qr-item,
-    .barcode-item {
-        width: 100%;
-        max-width: 320px;
-        min-width: 0;
-        padding: 20px;
-        margin: 0 auto;
-        aspect-ratio: 1;
-    }
-
-    .qr-code {
-        width: 100%;
-        max-width: 220px;
-        height: auto;
-        aspect-ratio: 1;
-    }
-
-    .barcode-code {
-        width: 100%;
-        max-width: 260px;
-        height: 120px;
-    }
-
-    .qr-placeholder img {
-        width: 100%;
-        min-width: 0;
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    /* =====================================
-       QR TEXT
-    ===================================== */
-    .qr-text,
-    .barcode-text {
-        font-size: 16px;
-        letter-spacing: 0.8px;
-        word-break: break-word;
-    }
-
-    /* =====================================
-       FOOTER
-    ===================================== */
-    footer {
-        padding: 15px 10px;
-        border-radius: 10px;
-    }
-
-    footer p {
-        font-size: 13px;
-    }
-}
-
-/* =====================================
-   SMALL MOBILE
-   iPhone SE / màn hình nhỏ
-===================================== */
-@media (max-width: 480px) {
-
-    body {
-        padding: 8px;
-    }
-
-    .container {
-        padding: 16px;
-        border-radius: 16px;
-        gap: 16px;
-    }
-
-    /* TAB */
-    .tab-btn {
-        min-width: 80px;
-        padding: 12px 8px;
-        font-size: 12px;
-        min-height: 58px;
-    }
-
-    /* TEXTAREA */
-    textarea#data_qr_single,
-    textarea#data_barcode_single,
-    textarea#data_qr_batch,
-    textarea#data_barcode_batch {
-        font-size: 15px;
-        padding: 12px;
-    }
-
-    /* QR */
-    .right-section {
-        padding: 15px !important;
-    }
-
-    .qr-item,
-    .barcode-item {
-        max-width: 280px;
-        padding: 16px;
-    }
-
-    .qr-code {
-        max-width: 190px;
-    }
-
-    .barcode-code {
-        max-width: 220px;
-        height: 100px;
-    }
-
-    /* BUTTON */
-    .btn-create,
-    .btn-create-barcode,
-    .btn-reset,
-    .btn-reset-barcode {
-        font-size: 15px;
-        padding: 14px;
     }
 }
 
