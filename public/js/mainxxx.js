@@ -64,21 +64,18 @@ function _doAjaxNod(type_, data_, m_, act_, nod_, global_, doSomeThing) {
     return;
 }
 
-function _doAjax(type_, data_, m_, act_, global_, doSomeThing, retryCsrf = true) {
-
-    if (data_ == "") {
+function _doAjax(type_, data_, m_, act_, global_, doSomeThing) {
+  if (data_ == "") {
         data_ = new FormData();
-        data_.set("browser", _getBrowserName());
+        data_.append("browser", _getBrowserName());
     } else {
-        data_.set("browser", _getBrowserName());
+        data_.append("browser", _getBrowserName());
     }
 
-    // Lấy token hiện tại
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    data_.set("csrf_token", csrfToken);
+    data_.append("csrf_token", document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 
     $.ajax({
-        type: type_,
+        type: type_, // "GET" hoặc "POST"
         url: domain + "/phpjquery/?m=" + encodeURIComponent(m_) + "&act=" + encodeURIComponent(act_),
         data: data_,
         processData: false,
@@ -86,14 +83,13 @@ function _doAjax(type_, data_, m_, act_, global_, doSomeThing, retryCsrf = true)
         async: true,
         cache: false,
         global: global_,
-        dataType: "text",
-
-        success: function(response) {
-
+        dataType: "text", // đảm bảo respone là chuỗi để split được
+        success: function (response) {
             var kq = response.split("##");
             if (kq.length === 2) {
                 debug_ajaxRunning(kq[0]);
 
+                // Ở đây bạn viết nhầm kq["1"], nên đổi thành kq[1]
                 var obj;
                 try {
                     obj = JSON.parse(kq[1]);
@@ -102,48 +98,28 @@ function _doAjax(type_, data_, m_, act_, global_, doSomeThing, retryCsrf = true)
                     alert_void("Dữ liệu trả về không hợp lệ!");
                     return;
                 }
+
                 switch (obj.status) {
                     case 200:
                         doSomeThing(obj);
-                        break;
-                    case 308:
-                        // CSRF hết hạn hoặc không hợp lệ
-                        if (retryCsrf) {
-                            console.log("CSRF hết hạn, đang refresh token...");
-                            refreshCsrfToken(function(success) {
-                                if (success) {
-                                    // Gửi lại request cũ
-                                    _doAjax(type_, data_, m_, act_, global_, doSomeThing, false);
-
-                                } else {
-                                    alert_void("Phiên làm việc đã hết hạn!");
-                                    setTimeout(function() {
-                                        location.reload();
-                                    }, 2000);
-                                }
-                            });
-                        } else {
-                            alert_void("CSRF token không hợp lệ!");
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        }
                         break;
                     case 401:
                         alert_void(obj.message || "Yêu cầu đăng nhập!");
                         break;
                     case 403:
                         alert_void(obj.message || "Truy cập bị từ chối!");
-                        break;
                     default:
                         alert_void(obj.message || "Có lỗi xảy ra!");
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
                         break;
                 }
             } else {
                 alert_void(response);
             }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error("AJAX Error:", status, error);
             alert_void("Không thể kết nối máy chủ!");
         }
@@ -151,43 +127,6 @@ function _doAjax(type_, data_, m_, act_, global_, doSomeThing, retryCsrf = true)
 
     printLog("doAjax ...");
     return;
-}
-
-function refreshCsrfToken(callback) {
-
-    $.ajax({
-        type: "POST",
-        url: domain + "/phpjquery/?m=session&act=csrf",
-        data: new FormData(),
-        processData: false,
-        contentType: false,
-        dataType: "text",
-        success: function(response) {
-            var kq = response.split("##");
-            if (kq.length === 2) {
-                try {
-                    var obj = JSON.parse(kq[1]);
-                    if (obj.status === 200 && obj.csrf_token) {
-                        document.querySelector('meta[name="csrf-token"]').setAttribute("content", obj.csrf_token);
-                        callback(true);
-                    } else {
-                        callback(false);
-                    }
-
-                } catch (e) {
-                    console.error("Refresh CSRF error:", e);
-                    callback(false);
-                }
-
-            } else {
-                callback(false);
-            }
-        },
-
-        error: function() {
-            callback(false);
-        }
-    });
 }
 
 function debug_ajaxRunning(kq_0) {
